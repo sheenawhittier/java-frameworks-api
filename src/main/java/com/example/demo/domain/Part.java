@@ -25,9 +25,10 @@ public abstract class Part implements Serializable {
     double price;
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
-
     //new fields
+    @Min(value = 0, message = "Min value must be positive")
     int min;
+    @Min(value = 0, message = "Max value must be positive")
     int max;
 
     @ManyToMany

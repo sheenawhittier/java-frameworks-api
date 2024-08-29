@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
         return (List<Product>) productRepository.findAll();
     }
 
-    // Step 5: Validate Inventory for Product Parts
+    // Validate Inventory for Product Parts
     private void validateProductInventory(Product theProduct) {
         for (Part part : theProduct.getParts()) {
             if (part.getInv() < part.getMin()) {
