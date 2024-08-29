@@ -23,12 +23,17 @@
 - **File Name**: mainscreen.html & MainScreenControllerr.java
 - **Change**: Added Buy Now button functionality to product list.
 
-## Part F
-**Prompt**: Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
-•  The “Buy Now” button must be next to the buttons that update and delete products.
-•  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
-•  Display a message that indicates the success or failure of a purchase.
-- **File Name**: mainscreen.html & MainScreenControllerr.java
-- **Change**: Added Buy Now button functionality to product list.
+## Part G
+**Prompt**: Modify the parts to track maximum and minimum inventory by doing the following:
+•  Add additional fields to the part entity for maximum and minimum inventory.
+•  Modify the sample inventory to include the maximum and minimum fields.
+•  Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.
+•  Rename the file the persistent storage is saved to.
+•  Modify the code to enforce that the inventory is between or at the minimum and maximum value.
+- **File Name**: Part.java, ProductServiceImpl.java, InhousePartForm.html, OutsourcedPartForm.html, application.properties, 
+- **Change**: -Implemented `min` and `max` fields in the `Part` entity to track minimum and maximum inventory levels. Updated `InhousePartForm.html` and `OutsourcedPartForm.html` to include input fields for `min` and `max` inventory values.
+- Modified sample inventory in `ProductServiceImpl` to set `min` and `max` values.
+- Renamed the persistent storage file to `fatality-hair-products`.
+- Added validation in `ProductServiceImpl` to enforce that inventory levels are between the `min` and `max` values before saving.
 
 
