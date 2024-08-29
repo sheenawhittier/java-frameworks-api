@@ -48,3 +48,8 @@
 - Added error messages to forms to handle invalid inventory inputs.
 - Ensured products cannot be saved if associated parts have inventory levels below the minimum or above the maximum.
 
+## Part I
+**Prompt**:Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.
+- **File Name**: PartTest.java, AddProductController.java, InhousePartTest.java, OutsourcedPartTest.java, ProductTest.java, 
+- **Change**: Successfully added inventory validation for min/max values and refactored controller logic. All unit tests passed without errors.
+  
