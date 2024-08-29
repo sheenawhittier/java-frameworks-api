@@ -36,4 +36,15 @@
 - Renamed the persistent storage file to `fatality-hair-products`.
 - Added validation in `ProductServiceImpl` to enforce that inventory levels are between the `min` and `max` values before saving.
 
+## Part H
+**Prompt**: H.  Add validation for between or at the maximum and minimum fields. The validation must include the following:
+•  Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.
+•  Display error messages for low inventory when adding and updating products lowers the part inventory below the minimum.
+•  Display error messages when adding and updating parts if the inventory is greater than the maximum.
+- **File Name**: PartService.java, PartServiceImpl.java, InhousePartForm.html, OutsourcedPartForm.html, ProductServiceImpl.java
+- **Change**: Added inventory validation for parts and products:
+- Implemented validation to ensure part inventory is between min and max values.
+- Updated PartService and ProductService to include inventory validation before saving.
+- Added error messages to forms to handle invalid inventory inputs.
+- Ensured products cannot be saved if associated parts have inventory levels below the minimum or above the maximum.
 

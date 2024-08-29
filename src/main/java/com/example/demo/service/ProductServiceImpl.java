@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(Product theProduct) {
-        validateInventory(theProduct);
+        validateProductInventory(theProduct); // Validate inventory before saving
         productRepository.save(theProduct);
     }
 
@@ -97,16 +97,21 @@ public class ProductServiceImpl implements ProductService {
         return (List<Product>) productRepository.findAll();
     }
 
-    // Step 5: Validate Inventory
-    private void validateInventory(Product theProduct) {
+    // Step 5: Validate Inventory for Product Parts
+    private void validateProductInventory(Product theProduct) {
         for (Part part : theProduct.getParts()) {
-            if (part.getInv() < part.getMin() || part.getInv() > part.getMax()) {
-                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' must be between "
-                        + part.getMin() + " and " + part.getMax() + ".");
+            if (part.getInv() < part.getMin()) {
+                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be less than the minimum allowed ("
+                        + part.getMin() + ").");
+            }
+            if (part.getInv() > part.getMax()) {
+                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be greater than the maximum allowed ("
+                        + part.getMax() + ").");
             }
         }
     }
 }
+
 
 
 
