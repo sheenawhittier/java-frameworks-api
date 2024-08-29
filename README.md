@@ -52,4 +52,8 @@
 **Prompt**:Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.
 - **File Name**: PartTest.java, AddProductController.java, InhousePartTest.java, OutsourcedPartTest.java, ProductTest.java, 
 - **Change**: Successfully added inventory validation for min/max values and refactored controller logic. All unit tests passed without errors.
-  
+
+## Part J - the scariest step of all! 
+**Prompt**:Remove the class files for any unused validators in order to clean your code.
+- **File Name**: ValidDeletePart, ValidEnufParts, DeletePartValidator, EnufPartsValidator, and ValidDeletePart.java, PriceProductValidator.java
+- **Change**: 
