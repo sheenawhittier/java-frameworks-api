@@ -15,9 +15,12 @@
 - **File Name**: `ProductServiceImpl.java'
 - **Change**: added sample inventory 
 
-## Part 
-**Prompt**:
-- **File Name**: 
-- **Change**:
+## Part F
+**Prompt**: Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
+•  The “Buy Now” button must be next to the buttons that update and delete products.
+•  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
+•  Display a message that indicates the success or failure of a purchase.
+- **File Name**: mainscreen.html & MainScreenControllerr.java
+- **Change**: Added Buy Now button functionality to product list.
 
 
