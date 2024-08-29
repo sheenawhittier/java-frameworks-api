@@ -57,3 +57,6 @@
 **Prompt**:Remove the class files for any unused validators in order to clean your code.
 - **File Name**: ValidDeletePart, ValidEnufParts, DeletePartValidator, EnufPartsValidator, and ValidDeletePart.java, PriceProductValidator.java
 - **Change**: Removed unused DeleteValidator to clean up the codebase
+
+## Part E & F
+Re-evaluated and fixed Parts and Products in BootStrapData.java, ProductServiceImpl.java, and Part.java to show 5 each

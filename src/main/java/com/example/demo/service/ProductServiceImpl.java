@@ -28,34 +28,10 @@ public class ProductServiceImpl implements ProductService {
 
     @PostConstruct
     public void init() {
-        if (partRepository.count() == 0 && productRepository.count() == 0) {
-            addSampleInventory();
-        }
+
     }
 
-    private void addSampleInventory() {
-        InhousePart part1 = new InhousePart();
-        part1.setName("Color Tube");
-        part1.setPrice(10.00);
-        part1.setInv(50);
-        part1.setMin(10);
-        part1.setMax(100);
-        part1.setPartId(123);
 
-        InhousePart part2 = new InhousePart();
-        part2.setName("Developer");
-        part2.setPrice(5.00);
-        part2.setInv(50);
-        part2.setMin(10);
-        part2.setMax(100);
-        part2.setPartId(124);
-
-        // Continue similarly for other parts...
-
-        partRepository.save(part1);
-        partRepository.save(part2);
-        //...
-    }
 
     @Override
     public List<Product> findAll() {
