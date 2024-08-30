@@ -1,40 +1,42 @@
 package com.example.demo.domain;
 
+import com.example.demo.validators.ValidMinMax;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- *
- *
- *
- */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
-@Table(name="Parts")
+@DiscriminatorColumn(name = "part_type", discriminatorType = DiscriminatorType.INTEGER)
+@Table(name = "Parts")
+@ValidMinMax
 public abstract class Part implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
     String name;
+
     @Min(value = 0, message = "Price value must be positive")
     double price;
+
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
-    //new fields
+
     @Min(value = 0, message = "Min value must be positive")
     int min;
+
     @Min(value = 0, message = "Max value must be positive")
     int max;
 
     @ManyToMany
-    @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
-            inverseJoinColumns=@JoinColumn(name="product_id"))
-    Set<Product> products= new HashSet<>();
+    @JoinTable(name = "product_part", joinColumns = @JoinColumn(name = "part_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    Set<Product> products = new HashSet<>();
 
     public Part() {
     }
@@ -112,9 +114,11 @@ public abstract class Part implements Serializable {
         this.products = products;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return this.name;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,3 +134,4 @@ public abstract class Part implements Serializable {
         return (int) (id ^ (id >>> 32));
     }
 }
+
