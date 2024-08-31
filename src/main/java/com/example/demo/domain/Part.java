@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.validators.ValidInv;
 import com.example.demo.validators.ValidMinMax;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 @DiscriminatorColumn(name = "part_type", discriminatorType = DiscriminatorType.INTEGER)
 @Table(name = "Parts")
 @ValidMinMax
+@ValidInv
 public abstract class Part implements Serializable {
 
     @Id
