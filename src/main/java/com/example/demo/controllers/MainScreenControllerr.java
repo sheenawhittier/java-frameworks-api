@@ -56,5 +56,10 @@ public class MainScreenControllerr {
         model.addAttribute("products", productService.findAll());
         return "mainscreen"; // Return to the main screen
     }
+    @GetMapping("/About")
+    public String showAboutPage() {
+        return "About";  // This will return the About.html template from the templates folder
+    }
+
 }
 
