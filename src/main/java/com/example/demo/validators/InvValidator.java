@@ -7,28 +7,20 @@ import javax.validation.ConstraintValidatorContext;
 
 public class InvValidator implements ConstraintValidator<ValidInv, Part> {
 
-    @Override
-    public void initialize(ValidInv constraintAnnotation) {
-        // No initialization needed in this case
-    }
-
-    @Override
     public boolean isValid(Part part, ConstraintValidatorContext context) {
-        if (part == null) {
-            return true;  // Skip validation if part is null
-        }
-
-        int inv = part.getInv();
-        int min = part.getMin();
-        int max = part.getMax();
-
-        if (inv < min || inv > max) {
+        if (part.getInv() < part.getMin()) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Inventory must be between the minimum (" + min + ") and maximum (" + max + ") values.")
+            context.buildConstraintViolationWithTemplate("Inventory cannot be less than the minimum value.")
+                    .addPropertyNode("inv")
+                    .addConstraintViolation();
+            return false;
+        } else if (part.getInv() > part.getMax()) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Inventory cannot be greater than the maximum value.")
+                    .addPropertyNode("inv")
                     .addConstraintViolation();
             return false;
         }
-
         return true;
     }
 }

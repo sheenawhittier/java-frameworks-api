@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,10 +21,12 @@ public class MainScreenControllerr {
     private final PartService partService;
     private final ProductService productService;
 
+    @Autowired
     public MainScreenControllerr(PartService partService, ProductService productService) {
         this.partService = partService;
         this.productService = productService;
-    }
+
+        }
 
     @GetMapping("/mainscreen")
     public String listPartsandProducts(Model theModel, @Param("partkeyword") String partkeyword, @Param("productkeyword") String productkeyword) {
@@ -30,15 +35,16 @@ public class MainScreenControllerr {
         theModel.addAttribute("partkeyword", partkeyword);
 
         List<Product> productList = productService.listAll(productkeyword);
+
         theModel.addAttribute("products", productList);
         theModel.addAttribute("productkeyword", productkeyword);
 
         return "mainscreen";
     }
 
-    @GetMapping("/product/buy/{id}")
-    public String buyProduct(@PathVariable("id") Long id, Model model) {
-        Product product = productService.findById(id.intValue());
+    @PostMapping("/product/buy")
+    public String buyProduct(Long productId, Model model) {
+        Product product = productService.findById(productId.intValue());
 
         if (product != null) {
             if (product.getInv() > 0) {
@@ -52,8 +58,9 @@ public class MainScreenControllerr {
             model.addAttribute("message", "Purchase failed! Product not found.");
         }
 
-        // Refresh the product list to show updated inventory
-        model.addAttribute("products", productService.findAll());
+        // Refresh the product list to show all products, including those with zero inventory
+        List<Product> productList = productService.findAll();
+        model.addAttribute("products", productList);
         return "mainscreen"; // Return to the main screen
     }
     @GetMapping("/About")

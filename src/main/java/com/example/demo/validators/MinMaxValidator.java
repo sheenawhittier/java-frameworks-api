@@ -9,26 +9,14 @@ import com.example.demo.validators.ValidMinMax;
 public class MinMaxValidator implements ConstraintValidator<ValidMinMax, Part> {
 
     @Override
-    public void initialize(ValidMinMax constraintAnnotation) {
-        // No initialization needed in this case
-    }
-
-    @Override
     public boolean isValid(Part part, ConstraintValidatorContext context) {
-        if (part == null) {
-            return true;  // Skip validation if part is null
-        }
-
-        int min = part.getMin();
-        int max = part.getMax();
-
-        if (min > max) {
+        if (part.getMin() > part.getMax()) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Minimum value cannot be greater than maximum value.")
+            context.buildConstraintViolationWithTemplate("Minimum value cannot be greater than the maximum value.")
+                    .addPropertyNode("min")
                     .addConstraintViolation();
             return false;
         }
-
         return true;
     }
 }
