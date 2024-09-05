@@ -65,7 +65,7 @@ public class AddProductController {
                     for (Part p : product2.getParts()) {
                         int inv = p.getInv();
                         p.setInv(inv - (product.getInv() - product2.getInv()));
-                        partService.savePart(p); // Ensure you use PartService to save parts
+                        partService.save(p); // Ensure you use PartService to save parts
                     }
                 }
             } else {
@@ -97,7 +97,7 @@ public class AddProductController {
         Product product2 = productService.findById(theId);
         for (Part part : product2.getParts()) {
             part.getProducts().remove(product2);
-            partService.savePart(part); // Use PartService to save parts
+            partService.save(part); // Use PartService to save parts
         }
         product2.getParts().clear();
         productService.save(product2);
@@ -115,7 +115,7 @@ public class AddProductController {
             product.getParts().add(part);
             part.getProducts().add(product);
             productService.save(product);
-            partService.savePart(part); // Use PartService to save parts
+            partService.save(part); // Use PartService to save parts
             theModel.addAttribute("product", product);
             theModel.addAttribute("assparts", product.getParts());
             List<Part> availParts = new ArrayList<>();
@@ -133,7 +133,7 @@ public class AddProductController {
         product.getParts().remove(part);
         part.getProducts().remove(product);
         productService.save(product);
-        partService.savePart(part); // Use PartService to save parts
+        partService.save(part); // Use PartService to save parts
         theModel.addAttribute("product", product);
         theModel.addAttribute("assparts", product.getParts());
         List<Part> availParts = new ArrayList<>();

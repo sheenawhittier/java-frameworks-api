@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Service
 public class PartServiceImpl implements PartService {
+
     private final PartRepository partRepository;
 
     @Autowired
@@ -48,8 +49,8 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public void savePart(Part thePart) {
-        validatePart(thePart); // Validate before saving
+    public void save(Part thePart) {
+        validatePartInventory(thePart); // Validate before saving
         partRepository.save(thePart);
     }
 
@@ -58,14 +59,13 @@ public class PartServiceImpl implements PartService {
         Long theIdl = (long) theId;
         partRepository.deleteById(theIdl);
     }
-
-    @Override
-    public void validatePart(Part part) {
+    // Validate that inventory is between Min and Max
+    private void validatePartInventory(Part part) {
         if (part.getInv() < part.getMin()) {
-            throw new IllegalArgumentException("Inventory cannot be less than the minimum allowed (" + part.getMin() + ").");
+            throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be less than the minimum allowed (" + part.getMin() + ").");
         }
         if (part.getInv() > part.getMax()) {
-            throw new IllegalArgumentException("Inventory cannot be greater than the maximum allowed (" + part.getMax() + ").");
+            throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be greater than the maximum allowed (" + part.getMax() + ").");
         }
     }
 

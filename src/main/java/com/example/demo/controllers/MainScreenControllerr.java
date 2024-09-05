@@ -4,15 +4,13 @@ import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
 import com.example.demo.service.PartService;
 import com.example.demo.service.ProductService;
-import org.springframework.data.repository.query.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,17 +23,18 @@ public class MainScreenControllerr {
     public MainScreenControllerr(PartService partService, ProductService productService) {
         this.partService = partService;
         this.productService = productService;
-
-        }
+    }
 
     @GetMapping("/mainscreen")
-    public String listPartsandProducts(Model theModel, @Param("partkeyword") String partkeyword, @Param("productkeyword") String productkeyword) {
+    public String listPartsandProducts(Model theModel, @RequestParam(value = "partkeyword", required = false) String partkeyword,
+                                       @RequestParam(value = "productkeyword", required = false) String productkeyword) {
+        // Fetch parts based on the search keyword
         List<Part> partList = partService.listAll(partkeyword);
         theModel.addAttribute("parts", partList);
         theModel.addAttribute("partkeyword", partkeyword);
 
+        // Fetch products based on the search keyword
         List<Product> productList = productService.listAll(productkeyword);
-
         theModel.addAttribute("products", productList);
         theModel.addAttribute("productkeyword", productkeyword);
 
@@ -63,10 +62,25 @@ public class MainScreenControllerr {
         model.addAttribute("products", productList);
         return "mainscreen"; // Return to the main screen
     }
+
+    @PostMapping("/savePart")
+    public String savePart(@Valid @ModelAttribute("part") Part part, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "partForm"; // Return to the part form with validation errors
+        }
+        try {
+            partService.save(part);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "partForm"; // Display the error message on the form
+        }
+        return "redirect:/mainscreen"; // Redirect back to the main screen after successful save
+    }
+
     @GetMapping("/About")
     public String showAboutPage() {
         return "About";  // This will return the About.html template from the templates folder
     }
-
 }
+
 

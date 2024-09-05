@@ -11,14 +11,11 @@ import java.util.List;
  *
  */
 public interface PartService {
-    public List<Part> findAll();
-    public Part findById(int theId);
-    public void savePart(Part thePart);  // Updated save method to include validation
-    public void deleteById(int theId);
+    List<Part> findAll();
+    Part findById(int theId);
+    void save(Part thePart);  // Updated save method to include validation
+    void deleteById(int theId);
+    List<Part> listAll(String keyword);
 
-    public List<Part> listAll(String keyword);
-
-    // New method for validation
-    public void validatePart(Part part);
 }
 

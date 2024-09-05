@@ -73,16 +73,14 @@ public class ProductServiceImpl implements ProductService {
         return (List<Product>) productRepository.findAll();
     }
 
-    // Validate Inventory for Product Parts
+    // Validation for Product affecting Part inventory
     private void validateProductInventory(Product theProduct) {
         for (Part part : theProduct.getParts()) {
             if (part.getInv() < part.getMin()) {
-                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be less than the minimum allowed ("
-                        + part.getMin() + ").");
+                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be less than the minimum allowed (" + part.getMin() + ").");
             }
             if (part.getInv() > part.getMax()) {
-                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be greater than the maximum allowed ("
-                        + part.getMax() + ").");
+                throw new IllegalArgumentException("Inventory for part '" + part.getName() + "' cannot be greater than the maximum allowed (" + part.getMax() + ").");
             }
         }
     }
