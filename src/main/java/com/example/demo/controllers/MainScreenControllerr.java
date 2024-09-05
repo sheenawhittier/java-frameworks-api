@@ -43,7 +43,7 @@ public class MainScreenControllerr {
     }
 
     @PostMapping("/product/buy")
-    public String buyProduct(Long productId, Model model) {
+    public String buyProduct(@RequestParam("productId") Long productId, Model model) {
         Product product = productService.findById(productId.intValue());
 
         if (product != null) {
