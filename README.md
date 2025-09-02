@@ -1,24 +1,22 @@
-# Custom Inventory Management Application
+# Java Frameworks API
 
-A Spring Boot web app for managing products and parts for a fictional salon (“Fatality Hair”). It demonstrates HTML UI customization, navigation, data seeding, purchase flow, and domain validation (min/max inventory) with unit tests.
+Spring Boot REST API (Java 17, Maven) demonstrating clean controller/service/repository layering, input validation, and simple data seeding.
+
+> Repo: **java-frameworks-api** · Build tool: **Maven** · Runtime: **Spring Boot**
 
 ---
 
 ## Tech Stack
-- **Language:** Java (Spring Boot, Spring MVC)
+- **Language:** Java 17
+- **Frameworks:** Spring Boot, Spring Web, Spring Validation
 - **Build:** Maven
-- **Views:** HTML/Thymeleaf
-- **Tests:** JUnit
-- **CI:** GitHub Actions (Java CI)
+- **Testing:** JUnit (and Spring Test where applicable)
 
 ---
 
-## Quick Start
+## Getting Started
 
+### 1) Build
 ```bash
-# Build
 mvn -B clean verify
 
-# Run locally
-mvn spring-boot:run
-# App → http://localhost:8080
