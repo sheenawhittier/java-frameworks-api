@@ -1,4 +1,6 @@
 # Java Frameworks API
+![Java CI](https://github.com/sheenawhittier/java-frameworks-api/actions/workflows/build.yml/badge.svg)
+
 
 Spring Boot REST API (Java 17, Maven) demonstrating clean controller/service/repository layering, input validation, and simple data seeding.
 
